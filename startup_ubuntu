@@ -1,0 +1,84 @@
+# install terminator
+sudo add-apt-repository ppa:mattrose/terminator
+sudo apt-get update
+sudo apt install terminator
+
+# Change Caps Lock to Left Ctrl
+sudo vi /etc/default/keyboard
+XKBOPTIONS="ctrl:nocaps" # TODO: It's need to edit in file, change it to just updating file
+sudo dpkg-reconfigure keyboard-configuration
+
+# Install git
+sudo apt install git
+
+# Install Docker and Docker Compose
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Install curl
+sudo apt install curl
+
+# Install nvm and node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+nvm install node
+nvm use node
+
+# install gcc
+sudo apt install gcc
+
+# install ripgrep for grep function
+sudo apt-get install ripgrep
+
+# Install neovim
+sudo apt install neovim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+# TODO: Copy config for neovim
+
+# TODO: Copy config for bash_aliases
+
+# Install psql
+
+sudo apt update && sudo apt upgrade
+sudo apt install postgresql -y postgresql-contrib
+sudo systemctl enable postgresql.service
+sudo systemctl start postgresql.service
+
+# Install Angular
+npm install -g @angular/cli
+
+# Install Wireguard
+sudo apt update
+sudo apt install openresolv wireguard
+sudo cp DBerazhny.conf /etc/wireguard/DBerazhny.conf
+
+# Install Postman
+sudo snap install postman
+
+# Install Chrome
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmour -o /usr/share/keyrings/chrome-keyring.gpg
+sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+sudo apt update
+sudo apt install google-chrome-stable
+
+# Install Mono
+sudo apt install ca-certificates gnupg
+sudo gpg --homedir /tmp --no-default-keyring --keyring /usr/share/keyrings/mono-official-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+sudo apt install mono-devel
