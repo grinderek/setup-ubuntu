@@ -1,0 +1,5 @@
+alias dc="sudo docker-compose"
+alias nv="/home/danila/.config/nvim/nvim.appimage ."
+alias start_vpn="sudo wg-quick up DBerazhny"
+alias stop_vpn="sudo wg-quick down DBerazhny"
+alias full_access="sudo chmod -R 777 ."
